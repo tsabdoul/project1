@@ -11,7 +11,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          node-version: '16.x'
+          node-version: '20.x'
 
       - name: Create environment file
         run: echo "date=$(date -u '+%Y%m%d')" >> $GITHUB_ENV
@@ -21,14 +21,14 @@ jobs:
         with:
           path: .buildozer_global
           key: buildozer-global-${{ hashFiles('buildozer.spec') }} # Replace with your path
-          node-version: '16.x'
+          node-version: '20.x'
 
       - name: Cache Buildozer directory
         uses: actions/cache@v2
         with:
           path: .buildozer
           key: ${{ runner.os }}-${{ env.date }}-${{ hashFiles('buildozer.spec') }}
-          node-version: '16.x'
+          node-version: '20.x'
 
       - name: Build with Buildozer
         uses: ArtemSBulgakov/buildozer-action@v1
@@ -42,4 +42,3 @@ jobs:
         with:
           name: package
           path: ${{ steps.buildozer.outputs.filename }}
-
